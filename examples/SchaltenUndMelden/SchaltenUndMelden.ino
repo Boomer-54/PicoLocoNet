@@ -48,15 +48,20 @@ void loop() {
     ln.sendSensor(MELDER, melder);
   }
 
-  // Schreiben: Weiche umschalten, ON und nach 200 ms OFF wie ein Stellpult
+  // Schreiben: Weiche umschalten, ON und nach 200 ms OFF wie ein Stellpult,
+  // nach jeder Änderung 50 ms Sperrzeit gegen Prellen
   static uint32_t offZeit = 0;
+  static uint32_t tasterZeit = 0;
   bool taster = digitalRead(PIN_TASTER) == LOW;
-  if (taster && !tasterAlt) {
-    weicheGerade = !weicheGerade;
-    ln.sendSwitch(WEICHE, weicheGerade, true);
-    offZeit = millis() + 200;
+  if (taster != tasterAlt && millis() - tasterZeit > 50) {
+    tasterAlt = taster;
+    tasterZeit = millis();
+    if (taster) {
+      weicheGerade = !weicheGerade;
+      ln.sendSwitch(WEICHE, weicheGerade, true);
+      offZeit = millis() + 200;
+    }
   }
-  tasterAlt = taster;
   if (offZeit && (int32_t)(millis() - offZeit) >= 0) {
     ln.sendSwitch(WEICHE, weicheGerade, false);
     offZeit = 0;

@@ -8,6 +8,11 @@ const uint16_t MELDER = 10;
 const uint16_t WEICHE = 5;
 const uint8_t PIN_MELDER = 2;
 const uint8_t PIN_TASTER = 3;
+#ifdef LED_BUILTIN
+const uint8_t LED_WEICHE = LED_BUILTIN;
+#else
+const uint8_t LED_WEICHE = 25;  // Board ohne LED_BUILTIN: Pin einer eigenen LED eintragen
+#endif
 
 PicoLocoNet ln;
 bool melderAlt = false;
@@ -16,7 +21,7 @@ bool weicheGerade = true;
 
 void setup() {
   Serial.begin(115200);
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_WEICHE, OUTPUT);
   pinMode(PIN_MELDER, INPUT_PULLUP);
   pinMode(PIN_TASTER, INPUT_PULLUP);
   ln.begin(Serial1, 0, 1);
@@ -29,7 +34,7 @@ void loop() {
     bool closed, on;
     if (PicoLocoNet::decodeSwitch(ln.frame(), addr, closed, on) && addr == WEICHE && on) {
       weicheGerade = closed;
-      digitalWrite(LED_BUILTIN, closed ? LOW : HIGH);
+      digitalWrite(LED_WEICHE, closed ? LOW : HIGH);
     }
     if (ln.frame()[0] == OPC_GPON) ln.sendSensor(MELDER, melderAlt);  // Zustand nach Gleisspannung EIN melden
   }

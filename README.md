@@ -62,7 +62,7 @@ Adressen sind 1-basiert wie in Rocrail und JMRI.
 ### Beispiele
 
 - **Monitor:** zeigt jeden Frame im seriellen Monitor, Weichen und Melder im Klartext
-- **SchaltenUndMelden:** Taster meldet einen Melder, ein zweiter Taster stellt eine Weiche, die Pico-LED folgt einer Weichenadresse
+- **SchaltenUndMelden:** Taster an GPIO 18 meldet einen Melder, ein Taster an GPIO 19 stellt eine Weiche, die Pico-LED folgt einer Weichenadresse
 
 ## Installation
 

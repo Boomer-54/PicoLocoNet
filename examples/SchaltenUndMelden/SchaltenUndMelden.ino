@@ -1,13 +1,13 @@
 // Lesen und Schreiben am LocoNet:
-// - Taster an GPIO 2 (gegen GND) meldet Melder 10 belegt/frei
+// - Taster an GPIO 18 (gegen GND) meldet Melder 10 belegt/frei
 // - Weichenbefehle für Adresse 5 schalten die LED auf dem Pico (abzweig = an)
-// - Taster an GPIO 3 (gegen GND) stellt Weiche 5 abwechselnd gerade/abzweig
+// - Taster an GPIO 19 (gegen GND) stellt Weiche 5 abwechselnd gerade/abzweig
 #include <PicoLocoNet.h>
 
 const uint16_t MELDER = 10;
 const uint16_t WEICHE = 5;
-const uint8_t PIN_MELDER = 2;
-const uint8_t PIN_TASTER = 3;
+const uint8_t PIN_MELDER = 18;  // Platinen-Pin 24
+const uint8_t PIN_TASTER = 19;  // Platinen-Pin 25
 #ifdef LED_BUILTIN
 const uint8_t LED_WEICHE = LED_BUILTIN;
 #else

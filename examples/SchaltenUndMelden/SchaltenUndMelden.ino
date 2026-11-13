@@ -39,10 +39,10 @@ void loop() {
     if (ln.frame()[0] == OPC_GPON) ln.sendSensor(MELDER, melderAlt);  // Zustand nach Gleisspannung EIN melden
   }
 
-  // Schreiben: Melder, nach jeder Änderung 20 ms Sperrzeit gegen Prellen
+  // Schreiben: Melder, nach jeder Änderung 50 ms Sperrzeit gegen Prellen
   static uint32_t entprell = 0;
   bool melder = digitalRead(PIN_MELDER) == LOW;
-  if (melder != melderAlt && millis() - entprell > 20) {
+  if (melder != melderAlt && millis() - entprell > 50) {
     melderAlt = melder;
     entprell = millis();
     ln.sendSensor(MELDER, melder);

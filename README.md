@@ -64,6 +64,11 @@ Adressen sind 1-basiert wie in Rocrail und JMRI.
 - **Monitor:** zeigt jeden Frame im seriellen Monitor, Weichen und Melder im Klartext
 - **SchaltenUndMelden:** Taster an GPIO 18 meldet einen Melder, ein Taster an GPIO 19 stellt eine Weiche, die Pico-LED folgt einer Weichenadresse
 
+## Getestet mit
+
+- Zentrale: YaMoRC YD7001
+- Rocrail ab Revision 7547
+
 ## Installation
 
 Ordner `PicoLocoNet` nach `Arduino/libraries/` kopieren. Board: arduino-pico (Earle Philhower), z. B. „Raspberry Pi Pico“.
